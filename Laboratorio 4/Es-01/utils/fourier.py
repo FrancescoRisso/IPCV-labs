@@ -16,3 +16,13 @@ def transform(img, log=False):
         return (20 * np.log(mag + 1), ph)
     return (mag, ph)
 
+
+def antitransform(mag, ph, delog=False):
+    if delog:
+        mag = np.exp(mag / 20) - 1
+
+    re, im = cv2.polarToCart(mag, ph)
+    img = cv2.merge([re, im])
+
+    antitr = cv2.idft(img)
+    return cv2.magnitude(antitr[:, :, 0], antitr[:, :, 1])
