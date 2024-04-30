@@ -20,3 +20,7 @@ def display_image(img, title="", index=1, greyscale=False):
 
 def show_images():
     plt.show()
+
+
+def new_window(title=""):
+    plt.figure(title)
