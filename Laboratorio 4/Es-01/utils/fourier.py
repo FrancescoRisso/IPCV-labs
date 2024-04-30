@@ -23,6 +23,7 @@ def antitransform(mag, ph, delog=False):
 
     re, im = cv2.polarToCart(mag, ph)
     img = cv2.merge([re, im])
+    img = np.fft.ifftshift(img)
 
     antitr = cv2.idft(img)
     return cv2.magnitude(antitr[:, :, 0], antitr[:, :, 1])
