@@ -19,7 +19,7 @@ def process_image(path):
     w, h = mag.shape
 
     for i, r in enumerate(radii):
-        filter = circular_mask(w, h, radius=r, zeros_inside=True)
+        filter = circular_mask(w, h, radius=r, zeros_inside=False)
         mag_filt = mag * filter
         result = antitransform(mag_filt, ph, delog=False)
 
