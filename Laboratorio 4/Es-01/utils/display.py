@@ -11,9 +11,9 @@ def set_grid_size(rows: int, cols: int):
     COLS = cols
 
 
-def display_image(img, title="", index=1):
+def display_image(img, title="", index=1, greyscale=False):
     plt.subplot(ROWS, COLS, index)
-    plt.imshow(img)
+    plt.imshow(img, cmap="gray" if greyscale else "viridis")
     plt.title(title)
     plt.axis(False)
 
