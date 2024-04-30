@@ -8,7 +8,7 @@ GRAPHS_PER_SETTING = 6
 
 
 def process_image(path):
-    radii = [1, 2, 4, 8, 16, 32, 64]
+    radii = [1, 2, 4, 8, 16, 32]
 
     new_window(path.replace("../", ""))
     set_grid_size(GRAPHS_PER_SETTING, len(radii))
@@ -19,7 +19,9 @@ def process_image(path):
     w, h = mag.shape
 
     for i, r in enumerate(radii):
-        filter = circular_mask(w, h, radius=r, zeros_inside=False)
+        small_filter = circular_mask(w, h, radius=r, zeros_inside=True)
+        large_filter = circular_mask(w, h, radius=2 * r, zeros_inside=False)
+        filter = small_filter * large_filter
         mag_filt = mag * filter
         result = antitransform(mag_filt, ph, delog=False)
 
