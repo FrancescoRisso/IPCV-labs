@@ -24,3 +24,18 @@ def show_images():
 
 def new_window(title=""):
     plt.figure(title)
+
+
+def init_display_video(onClose, title=""):
+    plt.ion()
+    fig = plt.figure()
+    fig.canvas.mpl_connect("close_event", lambda event: onClose(event))
+
+
+def show_video_frame(frame, title="", index=1, greyscale=False):
+    display_image(frame, title, index, greyscale)
+    plt.gcf().canvas.flush_events()
+
+
+def update_frame():
+    plt.draw()
